@@ -4,6 +4,672 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Absensi Magenta | Pegadaian Kanwil XI Semarang</title>
+
+  <style>
+    :root {
+      --navy: #123b70;
+      --blue: #245ca3;
+      --light-blue: #edf4ff;
+      --background: #f3f6fb;
+      --text: #20304a;
+      --muted: #748198;
+      --border: #e0e7f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      background: linear-gradient(120deg, #102f59, #245ca3);
+      color: white;
+      padding: 27px 20px;
+    }
+
+    .header-content {
+      max-width: 760px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo {
+      width: 53px;
+      height: 53px;
+      background: white;
+      color: var(--navy);
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+
+    header h1 {
+      font-size: 23px;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 13px;
+      color: #dce8fa;
+      line-height: 1.5;
+    }
+
+    main {
+      max-width: 620px;
+      margin: 35px auto;
+      padding: 0 18px;
+    }
+
+    .card {
+      background: white;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 8px 30px #17365d0a;
+    }
+
+    .step-label {
+      display: inline-block;
+      padding: 7px 11px;
+      background: var(--light-blue);
+      color: var(--blue);
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 19px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 9px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid #d8e0eb;
+      border-radius: 9px;
+      font-size: 14px;
+      color: var(--text);
+      background: white;
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px #245ca315;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 9px;
+      background: var(--blue);
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      background: #19477f;
+    }
+
+    .button:disabled {
+      background: #cbd5e1;
+      cursor: not-allowed;
+    }
+
+    .button-secondary {
+      background: white;
+      color: var(--blue);
+      border: 1px solid #cbd8e9;
+    }
+
+    .button-secondary:hover {
+      background: var(--light-blue);
+    }
+
+    .button-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .button-row .button-secondary {
+      width: 38%;
+    }
+
+    .button-row .button-primary {
+      flex: 1;
+    }
+
+    .profile {
+      background: #f5f8fd;
+      border: 1px solid var(--border);
+      padding: 15px;
+      border-radius: 11px;
+      margin-bottom: 23px;
+    }
+
+    .profile p {
+      font-size: 13px;
+      line-height: 1.9;
+      overflow-wrap: anywhere;
+    }
+
+    .profile strong {
+      color: var(--navy);
+    }
+
+    .date-box {
+      background: var(--light-blue);
+      color: var(--navy);
+      padding: 14px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .attendance-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .attendance-box {
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 18px 14px;
+      min-width: 0;
+    }
+
+    .attendance-icon {
+      font-size: 25px;
+      margin-bottom: 13px;
+    }
+
+    .attendance-box h3 {
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+
+    .time {
+      font-size: 28px;
+      font-weight: bold;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .status {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+      min-height: 34px;
+      margin-bottom: 13px;
+    }
+
+    .message {
+      margin-top: 17px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #245ca3;
+      overflow-wrap: anywhere;
+    }
+
+    .notice {
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 10px;
+      background: #f5f8fd;
+      color: #64748b;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px 20px 28px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 22px 16px;
+      }
+
+      header h1 {
+        font-size: 19px;
+      }
+
+      .logo {
+        width: 46px;
+        height: 46px;
+      }
+
+      main {
+        margin: 22px auto;
+        padding: 0 12px;
+      }
+
+      .card {
+        padding: 21px 17px;
+      }
+
+      h2 {
+        font-size: 21px;
+      }
+
+      .attendance-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .attendance-box {
+        padding: 18px;
+      }
+
+      .button-row {
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo" aria-hidden="true">✦</div>
+      <div>
+        <h1>ABSENSI MAGENTA</h1>
+        <p>PT Pegadaian Kanwil XI Semarang</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HALAMAN 1: IDENTITAS -->
+    <section id="halaman-identitas" class="card">
+      <span class="step-label">HALAMAN 1 · IDENTITAS PESERTA</span>
+
+      <h2>Selamat Datang!</h2>
+      <p class="description">
+        Silakan lengkapi identitas diri kamu sebelum
+        melanjutkan ke halaman absensi magang.
+      </p>
+
+      <form id="form-identitas">
+        <div class="form-group">
+          <label for="nama">Nama Lengkap</label>
+          <input
+            type="text"
+            id="nama"
+            placeholder="Masukkan nama lengkap"
+            autocomplete="name"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="jenis-magang">Jenis Magang</label>
+          <select id="jenis-magang" required>
+            <option value="">Pilih jenis magang</option>
+            <option value="Magenta">Magenta</option>
+            <option value="PKL">Praktik Kerja Lapangan (PKL)</option>
+            <option value="Magang Mandiri">Magang Mandiri</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="departemen">Departemen</label>
+          <select id="departemen" required>
+            <option value="">Pilih departemen</option>
+            <option value="Bisnis">Bisnis</option>
+            <option value="Operasional">Operasional</option>
+            <option value="Pemasaran">Pemasaran</option>
+            <option value="Keuangan">Keuangan</option>
+            <option value="SDM">Sumber Daya Manusia (SDM)</option>
+            <option value="Umum">Umum</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
+        </div>
+
+        <button class="button" type="submit">
+          Halaman Selanjutnya <span aria-hidden="true">→</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- HALAMAN 2: ABSENSI -->
+    <section id="halaman-absensi" class="card hidden">
+      <span class="step-label">HALAMAN 2 · ABSENSI HARIAN</span>
+
+      <h2>Absensi Kehadiran</h2>
+      <p class="description">
+        Pastikan identitas kamu sudah benar, lalu catat
+        waktu kedatangan dan kepulangan.
+      </p>
+
+      <div class="profile">
+        <p><strong>Nama:</strong> <span id="tampil-nama"></span></p>
+        <p><strong>Jenis Magang:</strong> <span id="tampil-jenis"></span></p>
+        <p><strong>Departemen:</strong> <span id="tampil-departemen"></span></p>
+      </div>
+
+      <div class="date-box">
+        <strong>Tanggal:</strong> <span id="tanggal"></span><br>
+        <strong>Waktu sekarang:</strong> <span id="jam-sekarang"></span>
+      </div>
+
+      <div class="attendance-grid">
+        <div class="attendance-box">
+          <div class="attendance-icon" aria-hidden="true">☀️</div>
+          <h3>Kedatangan</h3>
+          <div class="time" id="jam-masuk">--:--</div>
+          <p class="status" id="status-masuk">Belum melakukan absensi</p>
+          <button class="button" id="btn-masuk" type="button">
+            Absen Datang
+          </button>
+        </div>
+
+        <div class="attendance-box">
+          <div class="attendance-icon" aria-hidden="true">🌙</div>
+          <h3>Kepulangan</h3>
+          <div class="time" id="jam-pulang">--:--</div>
+          <p class="status" id="status-pulang">Belum melakukan absensi</p>
+          <button class="button" id="btn-pulang" type="button" disabled>
+            Absen Pulang
+          </button>
+        </div>
+      </div>
+
+      <p id="pesan" class="message" role="status" aria-live="polite"></p>
+
+      <div class="notice">
+        Catatan: versi demo ini menyimpan data di browser
+        perangkat yang digunakan. Waktu mengikuti jam perangkat,
+        bukan waktu server.
+      </div>
+
+      <div class="button-row">
+        <button class="button button-secondary" id="btn-kembali" type="button">
+          ← Kembali
+        </button>
+        <button class="button button-primary" id="btn-selesai" type="button">
+          Selesai
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Absensi Magenta · PT Pegadaian Kanwil XI Semarang<br>
+    Personal Portfolio Project
+  </footer>
+
+  <script>
+    const KEY_IDENTITAS = "magentaIdentitas";
+    const KEY_ABSENSI = "magentaAbsensi";
+
+    const halamanIdentitas = document.getElementById("halaman-identitas");
+    const halamanAbsensi = document.getElementById("halaman-absensi");
+    const formIdentitas = document.getElementById("form-identitas");
+
+    const elNama = document.getElementById("nama");
+    const elJenis = document.getElementById("jenis-magang");
+    const elDepartemen = document.getElementById("departemen");
+    const pesan = document.getElementById("pesan");
+
+    function tanggalHariIni() {
+      const d = new Date();
+      const tahun = d.getFullYear();
+      const bulan = String(d.getMonth() + 1).padStart(2, "0");
+      const hari = String(d.getDate()).padStart(2, "0");
+
+      return `${tahun}-${bulan}-${hari}`;
+    }
+
+    function waktuSekarang() {
+      return new Date().toLocaleTimeString("id-ID", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+      });
+    }
+
+    function bacaPenyimpanan(kunci, nilaiAwal) {
+      try {
+        const isi = localStorage.getItem(kunci);
+        return isi ? JSON.parse(isi) : nilaiAwal;
+      } catch {
+        return nilaiAwal;
+      }
+    }
+
+    function bacaIdentitas() {
+      return bacaPenyimpanan(KEY_IDENTITAS, null);
+    }
+
+    function bacaAbsensi() {
+      return bacaPenyimpanan(KEY_ABSENSI, {});
+    }
+
+    function kunciPeserta() {
+      const identitas = bacaIdentitas();
+
+      if (!identitas) return "";
+
+      return [
+        identitas.nama.trim().toLowerCase(),
+        identitas.jenis,
+        identitas.departemen
+      ].join("|");
+    }
+
+    function tampilkanHalaman(nomor) {
+      halamanIdentitas.classList.toggle("hidden", nomor !== 1);
+      halamanAbsensi.classList.toggle("hidden", nomor !== 2);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function perbaruiJam() {
+      const sekarang = new Date();
+
+      document.getElementById("tanggal").textContent =
+        sekarang.toLocaleDateString("id-ID", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric"
+        });
+
+      document.getElementById("jam-sekarang").textContent =
+        waktuSekarang();
+    }
+
+    function tampilkanIdentitas(identitas) {
+      document.getElementById("tampil-nama").textContent = identitas.nama;
+      document.getElementById("tampil-jenis").textContent = identitas.jenis;
+      document.getElementById("tampil-departemen").textContent =
+        identitas.departemen;
+    }
+
+    function perbaruiAbsensi() {
+      const semua = bacaAbsensi();
+      const peserta = kunciPeserta();
+      const catatan = semua[tanggalHariIni()]?.[peserta] || {};
+
+      document.getElementById("jam-masuk").textContent =
+        catatan.masuk || "--:--";
+
+      document.getElementById("jam-pulang").textContent =
+        catatan.pulang || "--:--";
+
+      document.getElementById("status-masuk").textContent =
+        catatan.masuk ? "Kedatangan berhasil dicatat" : "Belum melakukan absensi";
+
+      document.getElementById("status-pulang").textContent =
+        catatan.pulang ? "Kepulangan berhasil dicatat" : "Belum melakukan absensi";
+
+      document.getElementById("btn-masuk").disabled =
+        Boolean(catatan.masuk);
+
+      document.getElementById("btn-pulang").disabled =
+        !catatan.masuk || Boolean(catatan.pulang);
+    }
+
+    formIdentitas.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const identitas = {
+        nama: elNama.value.trim(),
+        jenis: elJenis.value,
+        departemen: elDepartemen.value
+      };
+
+      if (!identitas.nama || !identitas.jenis || !identitas.departemen) {
+        alert("Lengkapi semua identitas terlebih dahulu.");
+        return;
+      }
+
+      localStorage.setItem(KEY_IDENTITAS, JSON.stringify(identitas));
+
+      tampilkanIdentitas(identitas);
+      perbaruiJam();
+      perbaruiAbsensi();
+      pesan.textContent = "";
+      tampilkanHalaman(2);
+    });
+
+    document.getElementById("btn-masuk").addEventListener("click", function() {
+      const semua = bacaAbsensi();
+      const tanggal = tanggalHariIni();
+      const peserta = kunciPeserta();
+
+      if (!semua[tanggal]) semua[tanggal] = {};
+      if (!semua[tanggal][peserta]) semua[tanggal][peserta] = {};
+
+      if (semua[tanggal][peserta].masuk) {
+        pesan.textContent = "Absensi kedatangan sudah tercatat hari ini.";
+        return;
+      }
+
+      semua[tanggal][peserta].masuk = waktuSekarang();
+
+      localStorage.setItem(KEY_ABSENSI, JSON.stringify(semua));
+
+      pesan.textContent = "Absensi kedatangan berhasil dicatat.";
+      perbaruiAbsensi();
+    });
+
+    document.getElementById("btn-pulang").addEventListener("click", function() {
+      const semua = bacaAbsensi();
+      const tanggal = tanggalHariIni();
+      const peserta = kunciPeserta();
+      const catatan = semua[tanggal]?.[peserta];
+
+      if (!catatan?.masuk) {
+        pesan.textContent = "Silakan lakukan absensi kedatangan terlebih dahulu.";
+        return;
+      }
+
+      if (catatan.pulang) {
+        pesan.textContent = "Absensi kepulangan sudah tercatat hari ini.";
+        return;
+      }
+
+      catatan.pulang = waktuSekarang();
+      localStorage.setItem(KEY_ABSENSI, JSON.stringify(semua));
+
+      pesan.textContent = "Absensi kepulangan berhasil dicatat.";
+      perbaruiAbsensi();
+    });
+
+    document.getElementById("btn-kembali").addEventListener("click", function() {
+      const identitas = bacaIdentitas();
+
+      if (identitas) {
+        elNama.value = identitas.nama;
+        elJenis.value = identitas.jenis;
+        elDepartemen.value = identitas.departemen;
+      }
+
+      tampilkanHalaman(1);
+    });
+
+    document.getElementById("btn-selesai").addEventListener("click", function() {
+      pesan.textContent =
+        "Terima kasih. Pastikan kamu sudah melakukan absensi kedatangan dan kepulangan.";
+    });
+
+    const identitasTersimpan = bacaIdentitas();
+
+    if (identitasTersimpan) {
+      elNama.value = identitasTersimpan.nama;
+      elJenis.value = identitasTersimpan.jenis;
+      elDepartemen.value = identitasTersimpan.departemen;
+
+      tampilkanIdentitas(identitasTersimpan);
+      perbaruiAbsensi();
+      tampilkanHalaman(2);
+    }
+
+    perbaruiJam();
+    setInterval(perbaruiJam, 1000);
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Absensi Magenta - Pegadaian Kanwil XI Semarang</title>
 
   <style>
