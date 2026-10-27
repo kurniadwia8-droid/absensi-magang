@@ -4,105 +4,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Absensi Magenta | Pegadaian Kanwil XI Semarang</title>
+  <title>Absensi Magenta - Pegadaian Kanwil XI Semarang</title>
 
   <style>
     :root {
-      --navy: #123b70;
-      --blue: #245ca3;
-      --light-blue: #edf4ff;
-      --background: #f3f6fb;
-      --text: #20304a;
-      --muted: #748198;
-      --border: #e0e7f0;
+      --biru: #123b70;
+      --biru-muda: #eaf2ff;
+      --hijau: #00a859;
+      --teks: #243247;
+      --abu: #718096;
+      --putih: #ffffff;
+      --border: #dfe7f1;
     }
 
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      background: var(--background);
-      color: var(--text);
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f3f6fb;
+      color: var(--teks);
       min-height: 100vh;
     }
 
     header {
-      background: linear-gradient(120deg, #102f59, #245ca3);
+      background: var(--biru);
       color: white;
-      padding: 27px 20px;
-    }
-
-    .header-content {
-      max-width: 760px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      gap: 15px;
+      padding: 25px 20px 45px;
+      text-align: center;
     }
 
     .logo {
-      width: 53px;
-      height: 53px;
+      display: inline-block;
       background: white;
-      color: var(--navy);
-      border-radius: 13px;
-      display: grid;
-      place-items: center;
-      font-size: 26px;
-      flex-shrink: 0;
+      color: var(--biru);
+      font-size: 13px;
+      font-weight: bold;
+      padding: 9px 16px;
+      border-radius: 30px;
+      margin-bottom: 14px;
+      letter-spacing: 1px;
     }
 
     header h1 {
-      font-size: 23px;
+      font-size: 26px;
+      margin: 5px 0 10px;
       letter-spacing: 1px;
-      margin-bottom: 6px;
     }
 
     header p {
-      font-size: 13px;
+      font-size: 14px;
+      margin: 0;
       color: #dce8fa;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     main {
-      max-width: 620px;
-      margin: 35px auto;
-      padding: 0 18px;
+      width: min(760px, calc(100% - 30px));
+      margin: -25px auto 40px;
+      position: relative;
     }
 
     .card {
       background: white;
-      padding: 28px;
       border: 1px solid var(--border);
       border-radius: 18px;
-      box-shadow: 0 8px 30px #17365d0a;
+      padding: 28px;
+      box-shadow: 0 8px 28px rgba(18, 59, 112, 0.07);
+    }
+
+    .hidden {
+      display: none !important;
     }
 
     .step-label {
-      display: inline-block;
-      padding: 7px 11px;
-      background: var(--light-blue);
-      color: var(--blue);
-      border-radius: 7px;
-      font-size: 12px;
+      color: var(--hijau);
+      font-size: 11px;
       font-weight: bold;
-      margin-bottom: 20px;
+      letter-spacing: 1.5px;
     }
 
     h2 {
-      font-size: 24px;
-      margin-bottom: 10px;
+      color: var(--biru);
+      font-size: 23px;
+      margin: 12px 0 8px;
     }
 
     .description {
-      color: var(--muted);
+      color: var(--abu);
       font-size: 14px;
       line-height: 1.7;
-      margin-bottom: 25px;
+      margin: 0 0 25px;
     }
 
     .form-group {
@@ -113,188 +107,178 @@
       display: block;
       font-size: 13px;
       font-weight: bold;
-      margin-bottom: 9px;
+      margin-bottom: 8px;
+      color: #34445b;
     }
 
     input, select {
       width: 100%;
       padding: 13px 14px;
-      border: 1px solid #d8e0eb;
+      border: 1px solid #d5deea;
       border-radius: 9px;
       font-size: 14px;
-      color: var(--text);
+      color: var(--teks);
       background: white;
       outline: none;
     }
 
     input:focus, select:focus {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px #245ca315;
+      border-color: var(--biru);
+      box-shadow: 0 0 0 3px rgba(18, 59, 112, 0.08);
     }
 
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      width: 100%;
-      padding: 14px;
+    button {
       border: none;
       border-radius: 9px;
-      background: var(--blue);
-      color: white;
+      padding: 13px 17px;
       font-size: 14px;
       font-weight: bold;
       cursor: pointer;
-      text-decoration: none;
+      transition: 0.2s;
     }
 
-    .button:hover {
-      background: #19477f;
+    button:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
     }
 
-    .button:disabled {
-      background: #cbd5e1;
-      cursor: not-allowed;
+    .button-primary {
+      width: 100%;
+      color: white;
+      background: var(--biru);
+    }
+
+    .button-green {
+      color: white;
+      background: var(--hijau);
     }
 
     .button-secondary {
-      background: white;
-      color: var(--blue);
-      border: 1px solid #cbd8e9;
-    }
-
-    .button-secondary:hover {
-      background: var(--light-blue);
+      color: var(--biru);
+      background: var(--biru-muda);
     }
 
     .button-row {
       display: flex;
       gap: 12px;
-      margin-top: 25px;
+      flex-wrap: wrap;
+      margin-top: 20px;
     }
 
-    .button-row .button-secondary {
-      width: 38%;
-    }
-
-    .button-row .button-primary {
+    .button-row button {
       flex: 1;
+      min-width: 130px;
     }
 
-    .profile {
-      background: #f5f8fd;
-      border: 1px solid var(--border);
-      padding: 15px;
-      border-radius: 11px;
-      margin-bottom: 23px;
+    .clock-box {
+      background: var(--biru-muda);
+      border: 1px solid #d9e6fb;
+      border-radius: 13px;
+      text-align: center;
+      padding: 22px 15px;
+      margin: 20px 0;
     }
 
-    .profile p {
+    #jam-sekarang {
+      color: var(--biru);
+      font-size: 36px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    #tanggal-sekarang {
+      color: var(--abu);
       font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .identity-box {
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 16px;
+      margin: 18px 0;
       line-height: 1.9;
+      font-size: 14px;
       overflow-wrap: anywhere;
     }
 
-    .profile strong {
-      color: var(--navy);
+    .identity-box strong {
+      color: var(--biru);
     }
 
-    .date-box {
-      background: var(--light-blue);
-      color: var(--navy);
-      padding: 14px;
+    .status-box {
+      padding: 15px;
       border-radius: 10px;
-      margin-bottom: 20px;
+      background: #f7f9fc;
+      border: 1px solid var(--border);
       font-size: 13px;
       line-height: 1.8;
-    }
-
-    .attendance-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .attendance-box {
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      padding: 18px 14px;
-      min-width: 0;
-    }
-
-    .attendance-icon {
-      font-size: 25px;
-      margin-bottom: 13px;
-    }
-
-    .attendance-box h3 {
-      font-size: 15px;
-      margin-bottom: 14px;
-    }
-
-    .time {
-      font-size: 28px;
-      font-weight: bold;
-      color: var(--navy);
-      margin-bottom: 8px;
-    }
-
-    .status {
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.5;
-      min-height: 34px;
-      margin-bottom: 13px;
+      margin: 18px 0;
     }
 
     .message {
-      margin-top: 17px;
       font-size: 13px;
       line-height: 1.6;
-      color: #245ca3;
-      overflow-wrap: anywhere;
+      margin-top: 15px;
+      color: var(--hijau);
     }
 
     .notice {
-      margin-top: 20px;
-      padding: 14px;
-      border-radius: 10px;
-      background: #f5f8fd;
-      color: #64748b;
       font-size: 12px;
+      color: var(--abu);
       line-height: 1.7;
+      background: #f7f9fc;
+      border-radius: 9px;
+      padding: 13px;
+      margin-top: 20px;
     }
 
-    .hidden {
-      display: none !important;
+    .table-wrapper {
+      overflow-x: auto;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      text-align: left;
+    }
+
+    th {
+      background: var(--biru-muda);
+      color: var(--biru);
+      padding: 13px;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 13px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    tbody tr:hover {
+      background: #f8faff;
     }
 
     footer {
       text-align: center;
-      padding: 10px 20px 28px;
-      color: var(--muted);
+      color: var(--abu);
       font-size: 12px;
       line-height: 1.7;
+      padding: 0 20px 25px;
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 520px) {
       header {
-        padding: 22px 16px;
+        padding: 23px 15px 40px;
       }
 
       header h1 {
-        font-size: 19px;
-      }
-
-      .logo {
-        width: 46px;
-        height: 46px;
-      }
-
-      main {
-        margin: 22px auto;
-        padding: 0 12px;
+        font-size: 21px;
       }
 
       .card {
@@ -305,16 +289,16 @@
         font-size: 21px;
       }
 
-      .attendance-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .attendance-box {
-        padding: 18px;
+      #jam-sekarang {
+        font-size: 31px;
       }
 
       .button-row {
-        gap: 8px;
+        flex-direction: column;
+      }
+
+      .button-row button {
+        width: 100%;
       }
     }
   </style>
@@ -322,24 +306,19 @@
 
 <body>
   <header>
-    <div class="header-content">
-      <div class="logo" aria-hidden="true">✦</div>
-      <div>
-        <h1>ABSENSI MAGENTA</h1>
-        <p>PT Pegadaian Kanwil XI Semarang</p>
-      </div>
-    </div>
+    <div class="logo">PEGADAIAN</div>
+    <h1>ABSENSI MAGENTA</h1>
+    <p>PT Pegadaian Kanwil XI Semarang</p>
+    <p>Sistem Pencatatan Kehadiran Peserta Magang</p>
   </header>
 
   <main>
     <!-- HALAMAN 1: IDENTITAS -->
     <section id="halaman-identitas" class="card">
-      <span class="step-label">HALAMAN 1 · IDENTITAS PESERTA</span>
-
-      <h2>Selamat Datang!</h2>
+      <span class="step-label">HALAMAN 1 · IDENTITAS</span>
+      <h2>Identitas Peserta</h2>
       <p class="description">
-        Silakan lengkapi identitas diri kamu sebelum
-        melanjutkan ke halaman absensi magang.
+        Silakan isi identitas terlebih dahulu sebelum melakukan absensi.
       </p>
 
       <form id="form-identitas">
@@ -355,14 +334,23 @@
         </div>
 
         <div class="form-group">
-          <label for="jenis-magang">Jenis Magang</label>
-          <select id="jenis-magang" required>
+          <label for="jenis">Jenis Magang</label>
+          <select id="jenis" required>
             <option value="">Pilih jenis magang</option>
             <option value="Magenta">Magenta</option>
-            <option value="PKL">Praktik Kerja Lapangan (PKL)</option>
+            <option value="PKL">PKL</option>
             <option value="Magang Mandiri">Magang Mandiri</option>
             <option value="Lainnya">Lainnya</option>
           </select>
+        </div>
+
+        <div class="form-group hidden" id="jenis-lainnya-group">
+          <label for="jenis-lainnya">Jenis Magang Lainnya</label>
+          <input
+            type="text"
+            id="jenis-lainnya"
+            placeholder="Masukkan jenis magang"
+          >
         </div>
 
         <div class="form-group">
@@ -373,83 +361,127 @@
             <option value="Operasional">Operasional</option>
             <option value="Pemasaran">Pemasaran</option>
             <option value="Keuangan">Keuangan</option>
-            <option value="SDM">Sumber Daya Manusia (SDM)</option>
+            <option value="SDM">SDM</option>
             <option value="Umum">Umum</option>
             <option value="Lainnya">Lainnya</option>
           </select>
         </div>
 
-        <button class="button" type="submit">
-          Halaman Selanjutnya <span aria-hidden="true">→</span>
+        <div class="form-group hidden" id="departemen-lainnya-group">
+          <label for="departemen-lainnya">Departemen Lainnya</label>
+          <input
+            type="text"
+            id="departemen-lainnya"
+            placeholder="Masukkan nama departemen"
+          >
+        </div>
+
+        <button class="button-primary" type="submit">
+          Lanjut ke Absensi →
         </button>
       </form>
+
+      <p id="pesan-identitas" class="message" role="status"></p>
     </section>
 
     <!-- HALAMAN 2: ABSENSI -->
     <section id="halaman-absensi" class="card hidden">
-      <span class="step-label">HALAMAN 2 · ABSENSI HARIAN</span>
-
-      <h2>Absensi Kehadiran</h2>
+      <span class="step-label">HALAMAN 2 · ABSENSI</span>
+      <h2>Absensi Harian</h2>
       <p class="description">
-        Pastikan identitas kamu sudah benar, lalu catat
-        waktu kedatangan dan kepulangan.
+        Catat waktu kedatangan dan kepulangan peserta magang.
       </p>
 
-      <div class="profile">
-        <p><strong>Nama:</strong> <span id="tampil-nama"></span></p>
-        <p><strong>Jenis Magang:</strong> <span id="tampil-jenis"></span></p>
-        <p><strong>Departemen:</strong> <span id="tampil-departemen"></span></p>
+      <div class="clock-box">
+        <div id="jam-sekarang">00:00:00</div>
+        <div id="tanggal-sekarang">Memuat tanggal...</div>
       </div>
 
-      <div class="date-box">
-        <strong>Tanggal:</strong> <span id="tanggal"></span><br>
-        <strong>Waktu sekarang:</strong> <span id="jam-sekarang"></span>
-      </div>
+      <div class="identity-box" id="ringkasan-identitas"></div>
 
-      <div class="attendance-grid">
-        <div class="attendance-box">
-          <div class="attendance-icon" aria-hidden="true">☀️</div>
-          <h3>Kedatangan</h3>
-          <div class="time" id="jam-masuk">--:--</div>
-          <p class="status" id="status-masuk">Belum melakukan absensi</p>
-          <button class="button" id="btn-masuk" type="button">
-            Absen Datang
-          </button>
-        </div>
-
-        <div class="attendance-box">
-          <div class="attendance-icon" aria-hidden="true">🌙</div>
-          <h3>Kepulangan</h3>
-          <div class="time" id="jam-pulang">--:--</div>
-          <p class="status" id="status-pulang">Belum melakukan absensi</p>
-          <button class="button" id="btn-pulang" type="button" disabled>
-            Absen Pulang
-          </button>
-        </div>
-      </div>
-
-      <p id="pesan" class="message" role="status" aria-live="polite"></p>
-
-      <div class="notice">
-        Catatan: versi demo ini menyimpan data di browser
-        perangkat yang digunakan. Waktu mengikuti jam perangkat,
-        bukan waktu server.
+      <div class="status-box">
+        <strong>Status Absensi Hari Ini</strong><br>
+        Kedatangan: <span id="status-masuk">Belum tercatat</span><br>
+        Kepulangan: <span id="status-pulang">Belum tercatat</span>
       </div>
 
       <div class="button-row">
-        <button class="button button-secondary" id="btn-kembali" type="button">
-          ← Kembali
+        <button class="button-green" id="btn-masuk" type="button">
+          ✓ Absen Kedatangan
         </button>
-        <button class="button button-primary" id="btn-selesai" type="button">
-          Selesai
+        <button class="button-primary" id="btn-pulang" type="button">
+          ↗ Absen Kepulangan
         </button>
+      </div>
+
+      <p id="pesan-absensi" class="message" role="status"></p>
+
+      <div class="button-row">
+        <button class="button-secondary" id="btn-edit-identitas" type="button">
+          Edit Identitas
+        </button>
+        <button class="button-secondary" id="btn-riwayat" type="button">
+          ▤ Lihat Riwayat Absensi
+        </button>
+      </div>
+
+      <div class="notice">
+        Data tersimpan di browser yang sedang digunakan. Jam absensi mengikuti
+        waktu perangkat dan bukan waktu server terverifikasi.
+      </div>
+    </section>
+
+    <!-- HALAMAN 3: RIWAYAT -->
+    <section id="halaman-riwayat" class="card hidden">
+      <span class="step-label">HALAMAN 3 · RIWAYAT</span>
+      <h2>Riwayat Absensi</h2>
+      <p class="description">
+        Lihat catatan kedatangan dan kepulangan yang tersimpan di browser ini.
+      </p>
+
+      <div class="button-row">
+        <button class="button-secondary" id="btn-kembali-absensi" type="button">
+          ← Kembali ke Absensi
+        </button>
+        <button class="button-green" id="btn-ekspor" type="button">
+          ↓ Ekspor CSV
+        </button>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Tanggal</th>
+              <th>Nama</th>
+              <th>Jenis Magang</th>
+              <th>Departemen</th>
+              <th>Kedatangan</th>
+              <th>Kepulangan</th>
+            </tr>
+          </thead>
+          <tbody id="isi-riwayat">
+            <tr>
+              <td colspan="6" style="text-align:center">
+                Belum ada riwayat absensi.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p id="pesan-riwayat" class="message" role="status"></p>
+
+      <div class="notice">
+        Riwayat menampilkan data yang tersimpan pada browser ini saja.
+        Ekspor CSV mengunduh salinan data untuk dibuka di Excel.
       </div>
     </section>
   </main>
 
   <footer>
-    Absensi Magenta · PT Pegadaian Kanwil XI Semarang<br>
-    Personal Portfolio Project
+    ABSENSI MAGENTA · PT Pegadaian Kanwil XI Semarang<br>
+    Sistem pencatatan kehadiran peserta magang
   </footer>
 
   <script>
@@ -458,37 +490,26 @@
 
     const halamanIdentitas = document.getElementById("halaman-identitas");
     const halamanAbsensi = document.getElementById("halaman-absensi");
+    const halamanRiwayat = document.getElementById("halaman-riwayat");
     const formIdentitas = document.getElementById("form-identitas");
-
-    const elNama = document.getElementById("nama");
-    const elJenis = document.getElementById("jenis-magang");
-    const elDepartemen = document.getElementById("departemen");
-    const pesan = document.getElementById("pesan");
-
-    function tanggalHariIni() {
-      const d = new Date();
-      const tahun = d.getFullYear();
-      const bulan = String(d.getMonth() + 1).padStart(2, "0");
-      const hari = String(d.getDate()).padStart(2, "0");
-
-      return `${tahun}-${bulan}-${hari}`;
-    }
-
-    function waktuSekarang() {
-      return new Date().toLocaleTimeString("id-ID", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false
-      });
-    }
 
     function bacaPenyimpanan(kunci, nilaiAwal) {
       try {
-        const isi = localStorage.getItem(kunci);
-        return isi ? JSON.parse(isi) : nilaiAwal;
-      } catch {
+        const data = localStorage.getItem(kunci);
+        return data ? JSON.parse(data) : nilaiAwal;
+      } catch (error) {
+        console.error("Gagal membaca penyimpanan:", error);
         return nilaiAwal;
+      }
+    }
+
+    function simpanPenyimpanan(kunci, data) {
+      try {
+        localStorage.setItem(kunci, JSON.stringify(data));
+        return true;
+      } catch (error) {
+        console.error("Gagal menyimpan data:", error);
+        return false;
       }
     }
 
@@ -500,11 +521,42 @@
       return bacaPenyimpanan(KEY_ABSENSI, {});
     }
 
-    function kunciPeserta() {
-      const identitas = bacaIdentitas();
+    function tanggalHariIni() {
+      const sekarang = new Date();
+      const tahun = sekarang.getFullYear();
+      const bulan = String(sekarang.getMonth() + 1).padStart(2, "0");
+      const tanggal = String(sekarang.getDate()).padStart(2, "0");
+      return `${tahun}-${bulan}-${tanggal}`;
+    }
 
-      if (!identitas) return "";
+    function waktuSekarang() {
+      return new Date().toLocaleTimeString("id-ID", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+      });
+    }
 
+    function tanggalIndonesia(tanggal) {
+      const bagian = tanggal.split("-");
+      if (bagian.length !== 3) return tanggal;
+
+      const tanggalObjek = new Date(
+        Number(bagian[0]),
+        Number(bagian[1]) - 1,
+        Number(bagian[2])
+      );
+
+      return tanggalObjek.toLocaleDateString("id-ID", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      });
+    }
+
+    function kunciPeserta(identitas) {
       return [
         identitas.nama.trim().toLowerCase(),
         identitas.jenis,
@@ -515,149 +567,380 @@
     function tampilkanHalaman(nomor) {
       halamanIdentitas.classList.toggle("hidden", nomor !== 1);
       halamanAbsensi.classList.toggle("hidden", nomor !== 2);
+      halamanRiwayat.classList.toggle("hidden", nomor !== 3);
+
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    function perbaruiJam() {
-      const sekarang = new Date();
+    function isiFormIdentitas(identitas) {
+      document.getElementById("nama").value = identitas.nama || "";
 
-      document.getElementById("tanggal").textContent =
-        sekarang.toLocaleDateString("id-ID", {
-          weekday: "long",
-          day: "numeric",
-          month: "long",
-          year: "numeric"
-        });
+      const jenisPilihan = [
+        "Magenta", "PKL", "Magang Mandiri", "Lainnya"
+      ];
 
-      document.getElementById("jam-sekarang").textContent =
-        waktuSekarang();
+      if (jenisPilihan.includes(identitas.jenis)) {
+        document.getElementById("jenis").value = identitas.jenis;
+      } else {
+        document.getElementById("jenis").value = "Lainnya";
+        document.getElementById("jenis-lainnya").value = identitas.jenis || "";
+        document.getElementById("jenis-lainnya-group").classList.remove("hidden");
+        document.getElementById("jenis-lainnya").required = true;
+      }
+
+      const departemenPilihan = [
+        "Bisnis", "Operasional", "Pemasaran",
+        "Keuangan", "SDM", "Umum", "Lainnya"
+      ];
+
+      if (departemenPilihan.includes(identitas.departemen)) {
+        document.getElementById("departemen").value = identitas.departemen;
+      } else {
+        document.getElementById("departemen").value = "Lainnya";
+        document.getElementById("departemen-lainnya").value =
+          identitas.departemen || "";
+        document.getElementById("departemen-lainnya-group")
+          .classList.remove("hidden");
+        document.getElementById("departemen-lainnya").required = true;
+      }
     }
 
     function tampilkanIdentitas(identitas) {
-      document.getElementById("tampil-nama").textContent = identitas.nama;
-      document.getElementById("tampil-jenis").textContent = identitas.jenis;
-      document.getElementById("tampil-departemen").textContent =
-        identitas.departemen;
+      document.getElementById("ringkasan-identitas").innerHTML = "";
+
+      const ringkasan = document.getElementById("ringkasan-identitas");
+      const data = [
+        ["Nama", identitas.nama],
+        ["Jenis Magang", identitas.jenis],
+        ["Departemen", identitas.departemen]
+      ];
+
+      data.forEach(([label, nilai]) => {
+        const baris = document.createElement("div");
+        const judul = document.createElement("strong");
+        judul.textContent = label + ": ";
+        baris.appendChild(judul);
+        baris.appendChild(document.createTextNode(nilai));
+        ringkasan.appendChild(baris);
+      });
+    }
+
+    function perbaruiJam() {
+      document.getElementById("jam-sekarang").textContent = waktuSekarang();
+      document.getElementById("tanggal-sekarang").textContent =
+        tanggalIndonesia(tanggalHariIni());
     }
 
     function perbaruiAbsensi() {
+      const identitas = bacaIdentitas();
+      if (!identitas) return;
+
       const semua = bacaAbsensi();
-      const peserta = kunciPeserta();
-      const catatan = semua[tanggalHariIni()]?.[peserta] || {};
-
-      document.getElementById("jam-masuk").textContent =
-        catatan.masuk || "--:--";
-
-      document.getElementById("jam-pulang").textContent =
-        catatan.pulang || "--:--";
+      const tanggal = tanggalHariIni();
+      const peserta = kunciPeserta(identitas);
+      const catatan = semua[tanggal]?.[peserta] || {};
 
       document.getElementById("status-masuk").textContent =
-        catatan.masuk ? "Kedatangan berhasil dicatat" : "Belum melakukan absensi";
+        catatan.masuk || "Belum tercatat";
 
       document.getElementById("status-pulang").textContent =
-        catatan.pulang ? "Kepulangan berhasil dicatat" : "Belum melakukan absensi";
+        catatan.pulang || "Belum tercatat";
 
-      document.getElementById("btn-masuk").disabled =
-        Boolean(catatan.masuk);
-
+      document.getElementById("btn-masuk").disabled = Boolean(catatan.masuk);
       document.getElementById("btn-pulang").disabled =
         !catatan.masuk || Boolean(catatan.pulang);
+
+      document.getElementById("btn-masuk").style.opacity =
+        catatan.masuk ? "0.55" : "1";
+
+      document.getElementById("btn-pulang").style.opacity =
+        !catatan.masuk || catatan.pulang ? "0.55" : "1";
     }
 
-    formIdentitas.addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      const identitas = {
-        nama: elNama.value.trim(),
-        jenis: elJenis.value,
-        departemen: elDepartemen.value
-      };
-
-      if (!identitas.nama || !identitas.jenis || !identitas.departemen) {
-        alert("Lengkapi semua identitas terlebih dahulu.");
+    function catatAbsensi(jenis) {
+      const identitas = bacaIdentitas();
+      if (!identitas) {
+        tampilkanHalaman(1);
         return;
       }
 
-      localStorage.setItem(KEY_IDENTITAS, JSON.stringify(identitas));
+      const tanggal = tanggalHariIni();
+      const peserta = kunciPeserta(identitas);
+      const semua = bacaAbsensi();
+
+      if (!semua[tanggal]) semua[tanggal] = {};
+      if (!semua[tanggal][peserta]) {
+        semua[tanggal][peserta] = {
+          identitas: identitas,
+          masuk: "",
+          pulang: ""
+        };
+      }
+
+      const catatan = semua[tanggal][peserta];
+
+      if (jenis === "masuk") {
+        if (catatan.masuk) {
+          document.getElementById("pesan-absensi").textContent =
+            "Absensi kedatangan sudah tercatat hari ini.";
+          return;
+        }
+
+        catatan.identitas = identitas;
+        catatan.masuk = waktuSekarang();
+      } else {
+        if (!catatan.masuk) {
+          document.getElementById("pesan-absensi").textContent =
+            "Silakan lakukan absensi kedatangan terlebih dahulu.";
+          return;
+        }
+
+        if (catatan.pulang) {
+          document.getElementById("pesan-absensi").textContent =
+            "Absensi kepulangan sudah tercatat hari ini.";
+          return;
+        }
+
+        catatan.identitas = identitas;
+        catatan.pulang = waktuSekarang();
+      }
+
+      if (!simpanPenyimpanan(KEY_ABSENSI, semua)) {
+        document.getElementById("pesan-absensi").textContent =
+          "Data gagal disimpan. Periksa pengaturan penyimpanan browser.";
+        return;
+      }
+
+      document.getElementById("pesan-absensi").textContent =
+        jenis === "masuk"
+          ? "Absensi kedatangan berhasil dicatat."
+          : "Absensi kepulangan berhasil dicatat.";
+
+      perbaruiAbsensi();
+    }
+
+    function ambilRiwayat() {
+      const semua = bacaAbsensi();
+      const baris = [];
+
+      for (const [tanggal, pesertaHariIni] of Object.entries(semua)) {
+        if (!pesertaHariIni || typeof pesertaHariIni !== "object") continue;
+
+        for (const [kunci, catatanMentah] of Object.entries(pesertaHariIni)) {
+          if (!catatanMentah || typeof catatanMentah !== "object") continue;
+
+          const catatan = catatanMentah;
+          const bagianKunci = kunci.split("|");
+          const identitas = catatan.identitas || {};
+
+          baris.push({
+            tanggal,
+            nama: identitas.nama || bagianKunci[0] || "-",
+            jenis: identitas.jenis || bagianKunci[1] || "-",
+            departemen: identitas.departemen || bagianKunci[2] || "-",
+            masuk: catatan.masuk || "-",
+            pulang: catatan.pulang || "-"
+          });
+        }
+      }
+
+      return baris.sort((a, b) => {
+        const urutanTanggal = b.tanggal.localeCompare(a.tanggal);
+        if (urutanTanggal !== 0) return urutanTanggal;
+        return a.nama.localeCompare(b.nama);
+      });
+    }
+
+    function tampilkanRiwayat() {
+      const tbody = document.getElementById("isi-riwayat");
+      const riwayat = ambilRiwayat();
+      tbody.replaceChildren();
+
+      if (riwayat.length === 0) {
+        const tr = document.createElement("tr");
+        const td = document.createElement("td");
+        td.colSpan = 6;
+        td.textContent = "Belum ada riwayat absensi.";
+        td.style.textAlign = "center";
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+        return;
+      }
+
+      for (const data of riwayat) {
+        const tr = document.createElement("tr");
+        const nilai = [
+          data.tanggal,
+          data.nama,
+          data.jenis,
+          data.departemen,
+          data.masuk,
+          data.pulang
+        ];
+
+        for (const isi of nilai) {
+          const td = document.createElement("td");
+          td.textContent = isi;
+          tr.appendChild(td);
+        }
+
+        tbody.appendChild(tr);
+      }
+    }
+
+    function eksporCSV() {
+      const riwayat = ambilRiwayat();
+      const pesan = document.getElementById("pesan-riwayat");
+
+      if (riwayat.length === 0) {
+        pesan.textContent =
+          "Belum ada data untuk diekspor. Lakukan absensi terlebih dahulu.";
+        return;
+      }
+
+      const kolom = [
+        "Tanggal",
+        "Nama",
+        "Jenis Magang",
+        "Departemen",
+        "Jam Kedatangan",
+        "Jam Kepulangan"
+      ];
+
+      function amankanCSV(nilai) {
+        let teks = String(nilai ?? "");
+
+        // Mencegah isi data dianggap sebagai formula oleh aplikasi spreadsheet.
+        if (/^[\s\u0000-\u001f]*[=+\-@]/.test(teks)) {
+          teks = "'" + teks;
+        }
+
+        return '"' + teks.replace(/"/g, '""') + '"';
+      }
+
+      const isi = [
+        kolom.map(amankanCSV).join(";"),
+        ...riwayat.map(data => [
+          data.tanggal,
+          data.nama,
+          data.jenis,
+          data.departemen,
+          data.masuk,
+          data.pulang
+        ].map(amankanCSV).join(";"))
+      ].join("\r\n");
+
+      const file = new Blob(["\uFEFF" + isi], {
+        type: "text/csv;charset=utf-8;"
+      });
+
+      const url = URL.createObjectURL(file);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "riwayat-absensi-magenta.csv";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+      pesan.textContent = "File CSV berhasil disiapkan untuk diunduh.";
+    }
+
+    // Menampilkan kolom tambahan jika memilih "Lainnya".
+    document.getElementById("jenis").addEventListener("change", function () {
+      const lainnya = this.value === "Lainnya";
+      document.getElementById("jenis-lainnya-group")
+        .classList.toggle("hidden", !lainnya);
+      document.getElementById("jenis-lainnya").required = lainnya;
+    });
+
+    document.getElementById("departemen").addEventListener("change", function () {
+      const lainnya = this.value === "Lainnya";
+      document.getElementById("departemen-lainnya-group")
+        .classList.toggle("hidden", !lainnya);
+      document.getElementById("departemen-lainnya").required = lainnya;
+    });
+
+    // Menyimpan identitas dan membuka halaman absensi.
+    formIdentitas.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const nama = document.getElementById("nama").value.trim();
+      const pilihanJenis = document.getElementById("jenis").value;
+      const pilihanDepartemen = document.getElementById("departemen").value;
+
+      const jenis = pilihanJenis === "Lainnya"
+        ? document.getElementById("jenis-lainnya").value.trim()
+        : pilihanJenis;
+
+      const departemen = pilihanDepartemen === "Lainnya"
+        ? document.getElementById("departemen-lainnya").value.trim()
+        : pilihanDepartemen;
+
+      if (!nama || !jenis || !departemen) {
+        document.getElementById("pesan-identitas").textContent =
+          "Mohon lengkapi semua kolom identitas.";
+        return;
+      }
+
+      const identitas = { nama, jenis, departemen };
+
+      if (!simpanPenyimpanan(KEY_IDENTITAS, identitas)) {
+        document.getElementById("pesan-identitas").textContent =
+          "Identitas gagal disimpan. Periksa pengaturan browser.";
+        return;
+      }
 
       tampilkanIdentitas(identitas);
       perbaruiJam();
       perbaruiAbsensi();
-      pesan.textContent = "";
+      document.getElementById("pesan-absensi").textContent = "";
       tampilkanHalaman(2);
     });
 
-    document.getElementById("btn-masuk").addEventListener("click", function() {
-      const semua = bacaAbsensi();
-      const tanggal = tanggalHariIni();
-      const peserta = kunciPeserta();
-
-      if (!semua[tanggal]) semua[tanggal] = {};
-      if (!semua[tanggal][peserta]) semua[tanggal][peserta] = {};
-
-      if (semua[tanggal][peserta].masuk) {
-        pesan.textContent = "Absensi kedatangan sudah tercatat hari ini.";
-        return;
-      }
-
-      semua[tanggal][peserta].masuk = waktuSekarang();
-
-      localStorage.setItem(KEY_ABSENSI, JSON.stringify(semua));
-
-      pesan.textContent = "Absensi kedatangan berhasil dicatat.";
-      perbaruiAbsensi();
+    document.getElementById("btn-masuk").addEventListener("click", function () {
+      catatAbsensi("masuk");
     });
 
-    document.getElementById("btn-pulang").addEventListener("click", function() {
-      const semua = bacaAbsensi();
-      const tanggal = tanggalHariIni();
-      const peserta = kunciPeserta();
-      const catatan = semua[tanggal]?.[peserta];
-
-      if (!catatan?.masuk) {
-        pesan.textContent = "Silakan lakukan absensi kedatangan terlebih dahulu.";
-        return;
-      }
-
-      if (catatan.pulang) {
-        pesan.textContent = "Absensi kepulangan sudah tercatat hari ini.";
-        return;
-      }
-
-      catatan.pulang = waktuSekarang();
-      localStorage.setItem(KEY_ABSENSI, JSON.stringify(semua));
-
-      pesan.textContent = "Absensi kepulangan berhasil dicatat.";
-      perbaruiAbsensi();
+    document.getElementById("btn-pulang").addEventListener("click", function () {
+      catatAbsensi("pulang");
     });
 
-    document.getElementById("btn-kembali").addEventListener("click", function() {
-      const identitas = bacaIdentitas();
+    document.getElementById("btn-edit-identitas")
+      .addEventListener("click", function () {
+        const identitas = bacaIdentitas();
 
-      if (identitas) {
-        elNama.value = identitas.nama;
-        elJenis.value = identitas.jenis;
-        elDepartemen.value = identitas.departemen;
-      }
+        if (identitas) isiFormIdentitas(identitas);
+        document.getElementById("pesan-identitas").textContent = "";
+        tampilkanHalaman(1);
+      });
 
-      tampilkanHalaman(1);
+    document.getElementById("btn-riwayat").addEventListener("click", function () {
+      tampilkanRiwayat();
+      document.getElementById("pesan-riwayat").textContent = "";
+      tampilkanHalaman(3);
     });
 
-    document.getElementById("btn-selesai").addEventListener("click", function() {
-      pesan.textContent =
-        "Terima kasih. Pastikan kamu sudah melakukan absensi kedatangan dan kepulangan.";
-    });
+    document.getElementById("btn-kembali-absensi")
+      .addEventListener("click", function () {
+        perbaruiJam();
+        perbaruiAbsensi();
+        tampilkanHalaman(2);
+      });
 
+    document.getElementById("btn-ekspor").addEventListener("click", eksporCSV);
+
+    // Saat halaman dibuka kembali, muat identitas yang tersimpan.
     const identitasTersimpan = bacaIdentitas();
 
     if (identitasTersimpan) {
-      elNama.value = identitasTersimpan.nama;
-      elJenis.value = identitasTersimpan.jenis;
-      elDepartemen.value = identitasTersimpan.departemen;
-
+      isiFormIdentitas(identitasTersimpan);
       tampilkanIdentitas(identitasTersimpan);
       perbaruiAbsensi();
       tampilkanHalaman(2);
+    } else {
+      tampilkanHalaman(1);
     }
 
     perbaruiJam();
