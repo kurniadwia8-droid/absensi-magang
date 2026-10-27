@@ -2,7 +2,6 @@
 import { neon } from "@neondatabase/serverless";
 
 export default async function handler(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
@@ -21,38 +20,56 @@ export default async function handler(req, res) {
   try {
     if (req.method === "GET") {
       const rows = await sql`
-        SELECT * FROM attendance
-        ORDER BY created_at DESC
+        SELECT
+          id,
+          nama,
+          jenis_magang,
+          departemen,
+          tanggal,
+          masuk,
+          pulang
+        FROM attendance_records
+        ORDER BY tanggal DESC, nama ASC
       `;
+
       return res.status(200).json(rows);
     }
 
     if (req.method === "POST") {
-      const { nama, tanggal, jenis, waktu } = req.body;
+      const { nama, jenis, departemen, tanggal, masuk, pulang } =
+        req.body || {};
 
-      if (!nama || !tanggal || !jenis || !waktu) {
+      if (!nama || !jenis || !departemen || !tanggal) {
         return res.status(400).json({
-          error: "Data absensi belum lengkap"
+          error: "Identitas dan tanggal wajib diisi"
         });
       }
 
-      const rows = await sql`
-        INSERT INTO attendance
-          (nama, tanggal, jenis, waktu)
+      const hasil = await sql`
+        INSERT INTO attendance_records
+          (nama, jenis_magang, departemen, tanggal, masuk, pulang)
         VALUES
-          (${nama}, ${tanggal}, ${jenis}, ${waktu})
+          (${nama}, ${jenis}, ${departemen}, ${tanggal},
+           ${masuk || null}, ${pulang || null})
+        ON CONFLICT (tanggal, nama, jenis_magang, departemen)
+        DO UPDATE SET
+          masuk = COALESCE(attendance_records.masuk, EXCLUDED.masuk),
+          pulang = COALESCE(attendance_records.pulang, EXCLUDED.pulang),
+          updated_at = NOW()
         RETURNING *
       `;
 
-      return res.status(201).json(rows[0]);
+      return res.status(200).json(hasil[0]);
     }
 
     return res.status(405).json({
       error: "Metode tidak diizinkan"
     });
   } catch (error) {
+    console.error("Kesalahan API absensi:", error);
+
     return res.status(500).json({
-      error: "Terjadi kesalahan pada server"
+      error: "Gagal memproses data absensi"
     });
   }
 }
