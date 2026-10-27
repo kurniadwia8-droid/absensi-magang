@@ -1,0 +1,391 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Absensi Magang</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f5fb;
+      color: #20304a;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #173d70;
+      color: white;
+      padding: 26px 20px;
+    }
+
+    .header-content {
+      max-width: 850px;
+      margin: auto;
+    }
+
+    header h1 {
+      font-size: 25px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: #d5e4f8;
+      font-size: 14px;
+    }
+
+    main {
+      max-width: 850px;
+      margin: 30px auto;
+      padding: 0 18px;
+    }
+
+    .welcome {
+      margin-bottom: 24px;
+    }
+
+    .welcome h2 {
+      font-size: 23px;
+      margin-bottom: 8px;
+    }
+
+    .welcome p {
+      color: #687891;
+      line-height: 1.6;
+    }
+
+    .card {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 22px #233d6410;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 9px;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d4ddeb;
+      border-radius: 9px;
+      font-size: 15px;
+      margin-bottom: 18px;
+    }
+
+    .date {
+      background: #edf4ff;
+      color: #244f88;
+      border-radius: 9px;
+      padding: 13px;
+      margin-bottom: 22px;
+      font-size: 14px;
+    }
+
+    .attendance-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .attendance-box {
+      border: 1px solid #e0e8f3;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .attendance-box h3 {
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    .time {
+      font-size: 30px;
+      font-weight: bold;
+      color: #214e87;
+      margin-bottom: 12px;
+    }
+
+    .status {
+      color: #7a8799;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 9px;
+      background: #245ca3;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #19477f;
+    }
+
+    button:disabled {
+      background: #cbd5e1;
+      cursor: not-allowed;
+    }
+
+    .note {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #6b7b91;
+    }
+
+    #message {
+      margin-top: 16px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 16px;
+      color: #7b8798;
+      font-size: 12px;
+    }
+
+    @media (max-width: 540px) {
+      .attendance-grid {
+        grid-template-columns: 1fr;
+      }
+
+      header h1 {
+        font-size: 21px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-content">
+      <h1>ABSENSI MAGANG</h1>
+      <p>Internship Attendance System</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="welcome">
+      <h2>Selamat Datang!</h2>
+      <p>
+        Catat kehadiran dan waktu kegiatan magangmu
+        dengan mudah melalui halaman ini.
+      </p>
+    </section>
+
+    <section class="card">
+      <label for="nama">Nama Peserta Magang</label>
+      <input
+        type="text"
+        id="nama"
+        placeholder="Masukkan nama kamu"
+        autocomplete="name"
+      >
+
+      <div class="date">
+        <strong>Tanggal:</strong>
+        <span id="tanggal"></span>
+        <br>
+        <strong>Waktu saat ini:</strong>
+        <span id="jam-sekarang"></span>
+      </div>
+
+      <div class="attendance-grid">
+        <div class="attendance-box">
+          <h3>☀️ Absen Masuk</h3>
+          <div class="time" id="jam-masuk">--:--</div>
+          <p class="status" id="status-masuk">
+            Belum melakukan absen
+          </p>
+          <button id="btn-masuk" onclick="absenMasuk()">
+            Absen Masuk
+          </button>
+        </div>
+
+        <div class="attendance-box">
+          <h3>🌙 Absen Pulang</h3>
+          <div class="time" id="jam-pulang">--:--</div>
+          <p class="status" id="status-pulang">
+            Belum melakukan absen
+          </p>
+          <button id="btn-pulang" onclick="absenPulang()" disabled>
+            Absen Pulang
+          </button>
+        </div>
+      </div>
+
+      <p id="message" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="card">
+      <h3 style="margin-bottom: 12px;">Informasi Absensi</h3>
+      <p class="note">
+        • Lakukan absen masuk saat memulai kegiatan magang.<br>
+        • Lakukan absen pulang setelah kegiatan selesai.<br>
+        • Setiap hari hanya dapat mencatat satu kali masuk
+        dan satu kali pulang melalui browser ini.<br>
+        • Data disimpan pada browser dan perangkat yang
+        sedang digunakan.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    Absensi Magang · Personal Portfolio Project
+  </footer>
+
+  <script>
+    const kunciNama = "absensiNama";
+    const kunciData = "absensiData";
+
+    const inputNama = document.getElementById("nama");
+    const pesan = document.getElementById("message");
+
+    inputNama.value = localStorage.getItem(kunciNama) || "";
+
+    function tanggalHariIni() {
+      const sekarang = new Date();
+      const tahun = sekarang.getFullYear();
+      const bulan = String(sekarang.getMonth() + 1).padStart(2, "0");
+      const hari = String(sekarang.getDate()).padStart(2, "0");
+
+      return `${tahun}-${bulan}-${hari}`;
+    }
+
+    function waktuSekarang() {
+      return new Date().toLocaleTimeString("id-ID", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+      });
+    }
+
+    function bacaData() {
+      try {
+        return JSON.parse(localStorage.getItem(kunciData)) || {};
+      } catch {
+        return {};
+      }
+    }
+
+    function simpanData(data) {
+      localStorage.setItem(kunciData, JSON.stringify(data));
+    }
+
+    function tampilkanTanggal() {
+      const sekarang = new Date();
+
+      document.getElementById("tanggal").textContent =
+        sekarang.toLocaleDateString("id-ID", {
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+          year: "numeric"
+        });
+
+      document.getElementById("jam-sekarang").textContent =
+        waktuSekarang();
+    }
+
+    function perbaruiTampilan() {
+      const data = bacaData();
+      const catatan = data[tanggalHariIni()];
+
+      document.getElementById("jam-masuk").textContent =
+        catatan?.masuk || "--:--";
+
+      document.getElementById("jam-pulang").textContent =
+        catatan?.pulang || "--:--";
+
+      document.getElementById("status-masuk").textContent =
+        catatan?.masuk ? "Berhasil tercatat" : "Belum melakukan absen";
+
+      document.getElementById("status-pulang").textContent =
+        catatan?.pulang ? "Berhasil tercatat" : "Belum melakukan absen";
+
+      document.getElementById("btn-masuk").disabled =
+        Boolean(catatan?.masuk);
+
+      document.getElementById("btn-pulang").disabled =
+        !catatan?.masuk || Boolean(catatan?.pulang);
+    }
+
+    function absenMasuk() {
+      const nama = inputNama.value.trim();
+
+      if (!nama) {
+        pesan.textContent = "Silakan isi nama terlebih dahulu.";
+        inputNama.focus();
+        return;
+      }
+
+      const data = bacaData();
+      const tanggal = tanggalHariIni();
+
+      if (data[tanggal]?.masuk) {
+        pesan.textContent = "Absen masuk hari ini sudah tercatat.";
+        return;
+      }
+
+      data[tanggal] = {
+        nama: nama,
+        masuk: waktuSekarang(),
+        pulang: null
+      };
+
+      localStorage.setItem(kunciNama, nama);
+      simpanData(data);
+
+      pesan.textContent = "Absen masuk berhasil dicatat!";
+      perbaruiTampilan();
+    }
+
+    function absenPulang() {
+      const data = bacaData();
+      const tanggal = tanggalHariIni();
+
+      if (!data[tanggal]?.masuk) {
+        pesan.textContent = "Lakukan absen masuk terlebih dahulu.";
+        return;
+      }
+
+      if (data[tanggal].pulang) {
+        pesan.textContent = "Absen pulang sudah tercatat.";
+        return;
+      }
+
+      data[tanggal].pulang = waktuSekarang();
+      simpanData(data);
+
+      pesan.textContent = "Absen pulang berhasil dicatat!";
+      perbaruiTampilan();
+    }
+
+    tampilkanTanggal();
+    perbaruiTampilan();
+
+    setInterval(tampilkanTanggal, 1000);
+  </script>
+</body>
+</html>
